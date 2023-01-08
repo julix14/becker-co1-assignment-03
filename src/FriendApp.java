@@ -3,7 +3,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import java.awt.*;
 
 public class FriendApp extends Application {
     public static void main(String[] args){
@@ -16,14 +19,31 @@ public class FriendApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("guidata/Layout.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gui/Layout.fxml"));
         Parent root = loader.load();
+        GuiController controller = loader.getController();
 
         stage.setTitle("Friends-Organizer");
-        stage.setScene(new Scene(root));
-        stage.show();
 
-        GuiController controller = loader.getController();
+        // Set icon of the application
+        // Icon source = https://icons8.com/icon/qyyjUL6iltGF/people
+        Image icon = new Image("file:src/gui/icon_100x100.png");
+        stage.getIcons().add(icon);
+
+        // Add taskbar icon for MacOS
+        if (Taskbar.isTaskbarSupported()) {
+            var taskbar = Taskbar.getTaskbar();
+
+            if (taskbar.isSupported(Taskbar.Feature.ICON_IMAGE)) {
+                final Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
+                var dockIcon = defaultToolkit.getImage("src/gui/icon_100x100.png");
+                taskbar.setIconImage(dockIcon);
+            }
+        }
+
+        stage.setScene(new Scene(root));
+
+        stage.show();
 
         stage.setOnCloseRequest(event -> controller.shutdown());
 

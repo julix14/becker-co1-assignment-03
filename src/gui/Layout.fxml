@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<AnchorPane fx:id="baseScene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GuiController">
+   <children>
+      <ListView fx:id="friendsListView" layoutX="24.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0"/>
+      <Label layoutX="24.0" layoutY="83.0" text="List of your friends:"/>
+      <Text layoutX="24.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Organize your Friends!">
+         <font>
+            <Font size="18.0"/>
+         </font>
+      </Text>
+      <Button fx:id="editFriend" layoutX="406.0" layoutY="168.0" mnemonicParsing="false" onAction="#saveChangesOnFriend"
+              text="Save changes!"/>
+      <TextField fx:id="newFriendName" layoutX="406.0" layoutY="223.0" promptText="Name"/>
+      <Label layoutX="406.0" layoutY="206.0" text="Add new Friend:"/>
+      <TextField fx:id="newFriendNumber" layoutX="406.0" layoutY="255.0" promptText="Phone number"/>
+      <Button fx:id="addNewFriend" layoutX="406.0" layoutY="288.0" mnemonicParsing="false" onAction="#addFriend"
+              text="Add!"/>
+      <TextField fx:id="search" layoutX="28.0" layoutY="313.0" promptText="Search for friends:"/>
+      <Button fx:id="deleteFriend" layoutX="510.0" layoutY="168.0" mnemonicParsing="false" onAction="#deleteFriend"
+              text="Delete!"/>
+      <TextField fx:id="selectedFriendName" layoutX="406.0" layoutY="100.0" promptText="Select a friend from List"/>
+      <TextField fx:id="selectedFriendNumber" layoutX="406.0" layoutY="131.0"/>
+      <Button fx:id="searchButton" layoutX="202.0" layoutY="313.0" mnemonicParsing="false" onAction="#searchFriends"
+              text="Search"/>
+      <Label layoutX="406.0" layoutY="83.0" text="Selected friend:"/>
+   </children>
+</AnchorPane>
