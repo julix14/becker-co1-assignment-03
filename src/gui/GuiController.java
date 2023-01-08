@@ -5,10 +5,7 @@ import dataservices.FriendListExportService;
 import dataservices.FriendListImportService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
@@ -16,9 +13,6 @@ import java.util.concurrent.atomic.AtomicReference;
 public class GuiController implements Initializable {
     @FXML
     private ListView<String> friendsListView;
-
-    @FXML
-    private AnchorPane baseScene;
 
     @FXML
     private TextField selectedFriendName;
@@ -66,7 +60,7 @@ public class GuiController implements Initializable {
 
         searchButton.setOnAction(event -> {
             friendsListView.getItems().clear();
-            friendNames.set(friendList.stream().filter(friend -> friend.getName().toLowerCase().contains(search.getText().toLowerCase())).map(Friend::getName).toList());
+            friendNames.set(friendList.stream().map(Friend::getName).filter(name -> name.toLowerCase().contains(search.getText().toLowerCase())).toList());
             friendsListView.getItems().addAll(friendNames.get());
         });
 
