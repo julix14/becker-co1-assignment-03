@@ -1,22 +1,28 @@
-import dataclasses.Friend;
-import dataservices.FriendListExportService;
-import dataservices.FriendListImportService;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-import java.util.List;
+import java.net.URL;
 
-public class FriendApp {
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
+public class FriendApp extends Application {
+    public static void main(String[] args){
 
-        FriendListImportService friendListImportService = new FriendListImportService();
-        List<Friend> friendList = friendListImportService.importFriends();
+        launch(args);
 
-        friendList.add(new Friend().setName("John").setPhoneNumber("1234567890"));
-        friendList.add(new Friend().setName("Jane").setPhoneNumber("0987654321"));
+    }
 
-        FriendListExportService friendListExportService = new FriendListExportService();
-        friendListExportService.exportFriends(friendList);
-        System.out.println("Done!");
 
+    @Override
+    public void start(Stage stage) throws Exception {
+        URL urlToLayout = getClass().getResource("guidata/Layout.fxml");
+
+        assert urlToLayout != null;
+        Parent root = FXMLLoader.load(urlToLayout);
+
+        stage.setTitle("Friends-Organizer");
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }
