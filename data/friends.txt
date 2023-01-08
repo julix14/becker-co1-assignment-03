@@ -7,6 +7,3 @@ Leon Voit,087765530331
 Louis Francke,0263947463
 Sabine Lachs,0156585938
 Sabine Lachs,0170040383
-a,
-aa,
-aaaaaaa,

@@ -27,6 +27,6 @@ public class FriendListExportService {
 
         private String friendToString(Friend friend) {
             // Create a String out of the friend object
-            return friend.getName() + "," + friend.getPhoneNumber();
+            return friend.getName() + "," + (friend.getPhoneNumber() == null ? "No number found" : friend.getPhoneNumber());
         }
 }
