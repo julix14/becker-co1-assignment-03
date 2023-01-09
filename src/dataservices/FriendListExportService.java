@@ -4,6 +4,7 @@ import dataclasses.Friend;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.util.Comparator;
 import java.util.List;
 
 public class FriendListExportService {
@@ -12,6 +13,8 @@ public class FriendListExportService {
             try {
                 // Create a writer for the file
                 BufferedWriter writer = new BufferedWriter(new FileWriter("data/friends.txt"));
+
+                friendList.sort(Comparator.comparing(Friend::getName));
 
                 // Go through the list of friends and write them to the file
                 for (Friend friend : friendList) {
