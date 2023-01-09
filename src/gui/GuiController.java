@@ -82,12 +82,7 @@ public class GuiController implements Initializable {
         if (alert.showAndWait().get() == ButtonType.YES) {
             friendList.remove(currentFriend);
             friendsListView.getItems().remove(currentFriend.getName());
-            selectedFriendName.setText("Select a friend from list");
-            selectedFriendNumber.setText("");
-            selectedFriendName.setEditable(false);
-            selectedFriendNumber.setEditable(false);
-            selectedFriendName.setDisable(true);
-            selectedFriendNumber.setDisable(true);
+            resetCurrentFriendFields();
             wasChanged = true;
 
         }
@@ -105,6 +100,7 @@ public class GuiController implements Initializable {
         } else {
             friendsListView.getItems().addAll("No results found");
         }
+        resetCurrentFriendFields();
     }
 
     // Edit the selected friend
@@ -159,6 +155,15 @@ public class GuiController implements Initializable {
     private void updateFriendList() {
         friendsListView.getItems().clear();
         friendNames = new AtomicReference<>(filteredList.stream().map(Friend::getName).toList());
+    }
+
+    private void resetCurrentFriendFields() {
+        selectedFriendName.setText("Select a friend from list");
+        selectedFriendNumber.setText("");
+        selectedFriendName.setEditable(false);
+        selectedFriendNumber.setEditable(false);
+        selectedFriendName.setDisable(true);
+        selectedFriendNumber.setDisable(true);
     }
 
 

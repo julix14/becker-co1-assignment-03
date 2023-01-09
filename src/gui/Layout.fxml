@@ -21,14 +21,15 @@
       <TextField fx:id="newFriendNumber" layoutX="406.0" layoutY="255.0" promptText="Phone number"/>
       <Button fx:id="addNewFriend" layoutX="406.0" layoutY="288.0" mnemonicParsing="false" onAction="#addFriend"
               text="Add!"/>
-      <TextField fx:id="search" layoutX="28.0" layoutY="313.0" promptText="Search for friends:"/>
+      <TextField fx:id="search" layoutX="24.0" layoutY="313.0" onAction="#searchFriends" prefHeight="25.0"
+                 prefWidth="136.0" promptText="Search for friends:"/>
       <Button fx:id="deleteFriend" layoutX="510.0" layoutY="168.0" mnemonicParsing="false" onAction="#deleteFriend"
               text="Delete!"/>
       <TextField fx:id="selectedFriendName" disable="true" editable="false" layoutX="406.0" layoutY="100.0"
                  promptText="Select a friend from List"/>
       <TextField fx:id="selectedFriendNumber" disable="true" editable="false" layoutX="406.0" layoutY="131.0"/>
-      <Button fx:id="searchButton" layoutX="202.0" layoutY="313.0" mnemonicParsing="false" onAction="#searchFriends"
-              text="Search"/>
+      <Button fx:id="searchButton" layoutX="167.0" layoutY="313.0" mnemonicParsing="false" onAction="#searchFriends"
+              prefHeight="25.0" prefWidth="57.0" text="Search"/>
       <Label layoutX="406.0" layoutY="83.0" text="Selected friend:"/>
    </children>
 </AnchorPane>
