@@ -1,8 +1,8 @@
-package gui;
+package de.xuuniversity.co1.friendapp.gui;
 
-import dataclasses.Friend;
-import dataservices.FriendListExportService;
-import dataservices.FriendListImportService;
+import de.xuuniversity.co1.friendapp.dataclasses.Friend;
+import de.xuuniversity.co1.friendapp.dataservices.FriendListExportService;
+import de.xuuniversity.co1.friendapp.dataservices.FriendListImportService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

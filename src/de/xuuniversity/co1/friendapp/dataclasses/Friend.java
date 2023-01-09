@@ -1,4 +1,4 @@
-package dataclasses;
+package de.xuuniversity.co1.friendapp.dataclasses;
 
 
 public class Friend {

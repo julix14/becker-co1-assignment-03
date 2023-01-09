@@ -1,6 +1,6 @@
-package dataservices;
+package de.xuuniversity.co1.friendapp.dataservices;
 
-import dataclasses.Friend;
+import de.xuuniversity.co1.friendapp.dataclasses.Friend;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
