@@ -30,7 +30,7 @@ public class FriendApp extends Application {
         Image icon = new Image("file:src/gui/icon_100x100.png");
         stage.getIcons().add(icon);
 
-        // Add taskbar icon for MacOS
+        // Add task-bar icon for MacOS
         if (Taskbar.isTaskbarSupported()) {
             var taskbar = Taskbar.getTaskbar();
 
