@@ -2,17 +2,16 @@
 
 ## Assignment 3
 
-
-## Winter Semester 2022 /202 3
+## Winter Semester 2022/2023
 
 Prof. Dr. Mohammed AbuJarour
 
 
 ## 1. Overview
 
-In the context of this assignment, you will create a simple Java application that allows a user to
-
-manage a list of their friends. The application should have the following features:
+In the context of this assignment, you will create a simple Java application that allows a user to manage a list of
+their friends.
+The application should have the following features:
 
 1. The user should be able to add a new friend to the list, including their name and phone
     number.
