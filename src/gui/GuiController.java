@@ -35,16 +35,17 @@ public class GuiController implements Initializable {
     private TextField search;
 
 
-    public List<Friend> friendList;
-    Friend currentFriend;
-    AtomicReference<List<String>> friendNames;
+    private List<Friend> friendList;
+    private List<Friend> filteredList;
+    private Friend currentFriend;
+    private AtomicReference<List<String>> friendNames;
 
 
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         friendList = new FriendListImportService().importFriends();
+        filteredList = friendList;
         updateFriendList();
-
 
         // Fill friends List initially
         friendsListView.getItems().addAll(friendNames.get());
@@ -54,7 +55,10 @@ public class GuiController implements Initializable {
     public void shutdown() {
         if (!friendList.equals(new FriendListImportService().importFriends())) {
             // Initialize the upcoming alert
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Do you want to save your changes?", ButtonType.YES, ButtonType.NO);
+            Alert alert = new Alert(Alert.AlertType.WARNING,
+                    "Do you want to save your changes?",
+                    ButtonType.YES,
+                    ButtonType.NO);
 
             // Show the alert and act accordingly
             if (alert.showAndWait().get() == ButtonType.YES) {
@@ -68,7 +72,12 @@ public class GuiController implements Initializable {
 
     // Delete the selected friend
     public void deleteFriend(ActionEvent e) {
-        Alert alert = new Alert(Alert.AlertType.WARNING, "Sure, you want to delete the contact", ButtonType.YES, ButtonType.NO);
+        Alert alert = new Alert(
+                Alert.AlertType.WARNING,
+                "Sure, you want to delete the contact",
+                ButtonType.YES,
+                ButtonType.NO);
+
         if (alert.showAndWait().get() == ButtonType.YES) {
             friendList.remove(currentFriend);
             friendsListView.getItems().remove(currentFriend.getName());
@@ -79,19 +88,20 @@ public class GuiController implements Initializable {
             selectedFriendName.setDisable(true);
             selectedFriendNumber.setDisable(true);
         }
-
     }
 
     // Get the content of the search-textfield and display the results
     public void searchFriends(ActionEvent e) {
         updateFriendList();
-        List<String> searchResults = friendList.stream().map(Friend::getName).filter(name -> name.toLowerCase().contains(search.getText().toLowerCase())).toList();
-        if (searchResults.size() > 0) {
-            friendsListView.getItems().addAll(searchResults);
+        filteredList = friendList.stream().filter(
+                        friend -> friend.getName().toLowerCase()
+                                .contains(search.getText().toLowerCase()))
+                .toList();
+        if (filteredList.size() > 0) {
+            friendsListView.getItems().addAll(filteredList.stream().map(Friend::getName).toList());
         } else {
             friendsListView.getItems().addAll("No results found");
         }
-
     }
 
     // Edit the selected friend
@@ -99,7 +109,9 @@ public class GuiController implements Initializable {
         if (!selectedFriendName.getText().equals("") && !selectedFriendNumber.getText().equals("")) {
             currentFriend.setName(selectedFriendName.getText());
             currentFriend.setPhoneNumber(selectedFriendNumber.getText());
-            friendsListView.getItems().set(friendsListView.getSelectionModel().getSelectedIndex(), currentFriend.getName());
+            friendsListView.getItems().set(
+                    friendsListView.getSelectionModel().getSelectedIndex(),
+                    currentFriend.getName());
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Please fill out all fields", ButtonType.OK);
             alert.showAndWait();
@@ -125,7 +137,7 @@ public class GuiController implements Initializable {
     }
 
     public void selectFriend() {
-        currentFriend = friendList.get(friendsListView.getSelectionModel().getSelectedIndex());
+        currentFriend = filteredList.get(friendsListView.getSelectionModel().getSelectedIndex());
         if (currentFriend != null) {
             selectedFriendName.setText(currentFriend.getName());
             selectedFriendNumber.setText(currentFriend.getPhoneNumber());
@@ -138,7 +150,7 @@ public class GuiController implements Initializable {
 
     private void updateFriendList() {
         friendsListView.getItems().clear();
-        friendNames = new AtomicReference<>(friendList.stream().map(Friend::getName).toList());
+        friendNames = new AtomicReference<>(filteredList.stream().map(Friend::getName).toList());
     }
 
 
