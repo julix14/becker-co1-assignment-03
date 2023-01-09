@@ -39,6 +39,7 @@ public class GuiController implements Initializable {
     private List<Friend> filteredList;
     private Friend currentFriend;
     private AtomicReference<List<String>> friendNames;
+    private boolean wasChanged = false;
 
 
     @Override
@@ -53,7 +54,7 @@ public class GuiController implements Initializable {
 
     // Ask the user if he wants to save the changes
     public void shutdown() {
-        if (!friendList.equals(new FriendListImportService().importFriends())) {
+        if (wasChanged) {
             // Initialize the upcoming alert
             Alert alert = new Alert(Alert.AlertType.WARNING,
                     "Do you want to save your changes?",
@@ -87,6 +88,8 @@ public class GuiController implements Initializable {
             selectedFriendNumber.setEditable(false);
             selectedFriendName.setDisable(true);
             selectedFriendNumber.setDisable(true);
+            wasChanged = true;
+
         }
     }
 
@@ -109,9 +112,12 @@ public class GuiController implements Initializable {
         if (!selectedFriendName.getText().equals("") && !selectedFriendNumber.getText().equals("")) {
             currentFriend.setName(selectedFriendName.getText());
             currentFriend.setPhoneNumber(selectedFriendNumber.getText());
+
             friendsListView.getItems().set(
                     friendsListView.getSelectionModel().getSelectedIndex(),
                     currentFriend.getName());
+
+            wasChanged = true;
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Please fill out all fields", ButtonType.OK);
             alert.showAndWait();
@@ -128,6 +134,8 @@ public class GuiController implements Initializable {
             friendList.add(newFriend);
             updateFriendList();
             friendsListView.getItems().addAll(friendNames.get());
+
+            wasChanged = true;
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Please fill out all fields", ButtonType.OK);
             alert.showAndWait();
