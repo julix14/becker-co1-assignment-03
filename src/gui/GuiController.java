@@ -48,9 +48,6 @@ public class GuiController implements Initializable {
 
         // Fill friends List initially
         friendsListView.getItems().addAll(friendNames.get());
-
-
-        // Add listener to the list that updates the list
     }
 
     // Ask the user if he wants to save the changes
@@ -71,14 +68,18 @@ public class GuiController implements Initializable {
 
     // Delete the selected friend
     public void deleteFriend(ActionEvent e) {
-        friendList.remove(currentFriend);
-        friendsListView.getItems().remove(currentFriend.getName());
-        selectedFriendName.setText("Select a friend from list");
-        selectedFriendNumber.setText("");
-        selectedFriendName.setEditable(false);
-        selectedFriendNumber.setEditable(false);
-        selectedFriendName.setDisable(true);
-        selectedFriendNumber.setDisable(true);
+        Alert alert = new Alert(Alert.AlertType.WARNING, "Sure, you want to delete the contact", ButtonType.YES, ButtonType.NO);
+        if (alert.showAndWait().get() == ButtonType.YES) {
+            friendList.remove(currentFriend);
+            friendsListView.getItems().remove(currentFriend.getName());
+            selectedFriendName.setText("Select a friend from list");
+            selectedFriendNumber.setText("");
+            selectedFriendName.setEditable(false);
+            selectedFriendNumber.setEditable(false);
+            selectedFriendName.setDisable(true);
+            selectedFriendNumber.setDisable(true);
+        }
+
     }
 
     // Get the content of the search-textfield and display the results
