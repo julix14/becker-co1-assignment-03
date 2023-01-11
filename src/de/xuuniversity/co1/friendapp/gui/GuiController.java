@@ -106,8 +106,8 @@ public class GuiController implements Initializable {
     // Edit the selected friend
     public void saveChangesOnFriend(ActionEvent e) {
         if (!selectedFriendName.getText().equals("") && !selectedFriendNumber.getText().equals("")) {
-            currentFriend.setName(selectedFriendName.getText());
-            currentFriend.setPhoneNumber(selectedFriendNumber.getText());
+            currentFriend.setName(selectedFriendName.getText().strip());
+            currentFriend.setPhoneNumber(selectedFriendNumber.getText().strip());
 
             friendsListView.getItems().set(
                     friendsListView.getSelectionModel().getSelectedIndex(),
