@@ -125,8 +125,8 @@ public class GuiController implements Initializable {
     public void addFriend(ActionEvent e) {
         if (!newFriendName.getText().equals("") && !newFriendNumber.getText().equals("")) {
             Friend newFriend = new Friend();
-            newFriend.setName(newFriendName.getText());
-            newFriend.setPhoneNumber(newFriendNumber.getText());
+            newFriend.setName(newFriendName.getText().strip());
+            newFriend.setPhoneNumber(newFriendNumber.getText().strip());
             friendList.add(newFriend);
             updateFriendList();
             friendsListView.getItems().addAll(friendNames.get());
