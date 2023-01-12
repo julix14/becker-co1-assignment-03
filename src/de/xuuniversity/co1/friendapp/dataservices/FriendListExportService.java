@@ -9,7 +9,7 @@ import java.util.List;
 
 public class FriendListExportService {
 
-        public void exportFriends(List<Friend> friendList) {
+        public static void exportFriends(List<Friend> friendList) {
             try {
                 // Create a writer for the file
                 BufferedWriter writer = new BufferedWriter(new FileWriter("data/friends.txt"));
@@ -28,8 +28,8 @@ public class FriendListExportService {
             }
         }
 
-        private String friendToString(Friend friend) {
-            // Create a String out of the friend object
-            return friend.getName() + "," + (friend.getPhoneNumber() == null ? "No number found" : friend.getPhoneNumber());
-        }
+    private static String friendToString(Friend friend) {
+        // Create a String out of the friend object
+        return friend.getName() + "," + (friend.getPhoneNumber() == null ? "No number found" : friend.getPhoneNumber());
+    }
 }

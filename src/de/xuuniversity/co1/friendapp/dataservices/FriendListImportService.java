@@ -10,9 +10,9 @@ import java.util.List;
 public class FriendListImportService {
 
 
-    public List<Friend> importFriends() {
+    public static List<Friend> importFriends() {
         List<Friend> friendList = new ArrayList<>();
-        try{
+        try {
             // Create a reader for the file
             BufferedReader reader = new BufferedReader(new FileReader("data/friends.txt"));
 
@@ -31,7 +31,7 @@ public class FriendListImportService {
         return friendList;
     }
 
-    private Friend parseFriend(String line) {
+    private static Friend parseFriend(String line) {
         // Set constants for the indexes of the name and phone number in friendData Array
         final int NAME_POSITION = 0;
         final int PHONE_NUMBER_POSITION = 1;
@@ -40,8 +40,6 @@ public class FriendListImportService {
         String[] friendData = line.split(",");
 
         // Create a new Friend object and return it
-        Friend friend = new Friend();
-        friend.setName(friendData[NAME_POSITION]).setPhoneNumber(friendData[PHONE_NUMBER_POSITION]);
-        return friend;
+        return new Friend(friendData[NAME_POSITION], friendData[PHONE_NUMBER_POSITION]);
     }
 }
