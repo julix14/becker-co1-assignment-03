@@ -3,25 +3,26 @@ package de.xuuniversity.co1.friendapp.dataclasses;
 
 public class Friend {
 
-    private String name;
+    private final String name;
 
-    private String phoneNumber;
+    private final String phoneNumber;
+
+    public Friend(String name, String phoneNumber) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getName() {
         return name;
     }
 
-    public Friend setName(String name) {
-        this.name = name;
-        return this;
-    }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public Friend setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-        return this;
+    @Override
+    public String toString() {
+        return this.getName();
     }
 }
