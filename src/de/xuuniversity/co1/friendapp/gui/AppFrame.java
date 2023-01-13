@@ -181,7 +181,7 @@ public class AppFrame extends JFrame {
         //Add new friend button
         addButton.addActionListener(e -> {
             //Check if all fields are filled
-            if (nameContentField.getText().isEmpty() || phoneNumberContentField.getText().isEmpty()) {
+            if (nameContentField.getText().trim().isEmpty() || phoneNumberContentField.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please fill out all fields");
             } else {
                 //Create a new friend with the given name and number
@@ -223,6 +223,9 @@ public class AppFrame extends JFrame {
 
             addButton.setEnabled(true);
             deleteButton.setEnabled(false);
+
+            friendsJList.clearSelection();
+            friendsJList.setEnabled(false);
         });
 
         //Radio button to change the mode from "add new" to "view"
@@ -233,6 +236,8 @@ public class AppFrame extends JFrame {
 
             addButton.setEnabled(false);
             deleteButton.setEnabled(true);
+
+            friendsJList.setEnabled(true);
         });
 
         //List-Listener
