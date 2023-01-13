@@ -7,25 +7,35 @@ import java.io.FileWriter;
 import java.util.Comparator;
 import java.util.List;
 
-public class FriendListExportService {
+public abstract class FriendListExportService {
 
-        public static void exportFriends(List<Friend> friendList) {
-            try {
-                // Create a writer for the file
-                BufferedWriter writer = new BufferedWriter(new FileWriter("data/friends.txt"));
+    public static void exportFriends(List<Friend> friendList) {
+        BufferedWriter writer = null;
+        try {
+            // Create a writer for the file
+            writer = new BufferedWriter(new FileWriter("data/friends.txt"));
 
-                friendList.sort(Comparator.comparing(Friend::getName));
+            friendList.sort(Comparator.comparing(Friend::getName));
 
-                // Go through the list of friends and write them to the file
-                for (Friend friend : friendList) {
-                    writer.write(friendToString(friend));
-                    writer.newLine();
-                }
-                // Close the writer
-                writer.close();
-            } catch (Exception e) {
-                System.err.println("Error: " + e.getMessage());
+            // Go through the list of friends and write them to the file
+            for (Friend friend : friendList) {
+                writer.write(friendToString(friend));
+                writer.newLine();
             }
+            // Close the writer
+            writer.close();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            // Close the writer
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (Exception e) {
+                    System.err.println("Error: " + e.getMessage());
+                }
+            }
+        }
         }
 
     private static String friendToString(Friend friend) {

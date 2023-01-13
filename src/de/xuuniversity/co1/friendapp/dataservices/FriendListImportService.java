@@ -7,14 +7,15 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FriendListImportService {
+public abstract class FriendListImportService {
 
 
     public static List<Friend> importFriends() {
         List<Friend> friendList = new ArrayList<>();
+        BufferedReader reader = null;
         try {
             // Create a reader for the file
-            BufferedReader reader = new BufferedReader(new FileReader("data/friends.txt"));
+            reader = new BufferedReader(new FileReader("data/friends.txt"));
 
             // Go through the file line by line and parse the content to friend objects
             String line = reader.readLine();
@@ -22,9 +23,18 @@ public class FriendListImportService {
                 friendList.add(parseFriend(line));
                 line = reader.readLine();
             }
-            reader.close();
-        }catch (Exception e){
+
+        } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
+        } finally {
+            // Close the reader
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (Exception e) {
+                    System.err.println("Error: " + e.getMessage());
+                }
+            }
         }
 
         // Return the list of friends
